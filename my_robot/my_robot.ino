@@ -10,8 +10,8 @@
 //Dx_Low; - установка низкого уровня на пине Х
 //Ax_Read; - чтение аналогового пина Х
 #define encoders_init D2_In; D3_In; D2_High; D3_High
-#define robot_go D4_Low; D5_High; D6_High; D7_Low
-#define robot_stop D4_Low; D5_Low; D6_Low; D7_Low
+//#define robot_go D4_Low; D5_High; D6_High; D7_Low
+//#define robot_stop D4_Low; D5_Low; D6_Low; D7_Low
 //#define robot_left  D4_Low; D5_High; D6_Low; D7_Low
 //#define robot_right D4_Low; D5_Low; D6_High; D7_Low
 #define robot_rotation_left D4_Low; D5_High; D6_Low; D7_High
@@ -37,7 +37,8 @@ void Rotation()
   IntOff();
   robot_rotation_left;
   delay_ms(180);
-  robot_stop; 
+  motor1.run(RELEASE);
+  motor2.run(RELEASE); 
   course=0; 
   IntOn();  
 }   
