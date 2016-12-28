@@ -130,4 +130,7 @@ void loop() {
   
   //поворот налево
   robot_left();
+  delay(500);
+  robot_stop();
+  
 }
