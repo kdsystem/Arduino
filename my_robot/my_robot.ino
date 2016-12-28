@@ -26,6 +26,9 @@
 //#define robot_right D4_Low; D5_Low; D6_High; D7_Low
 #define robot_rotation_left D4_Low; D5_High; D6_Low; D7_High
 
+const byte MOTOR_SPEED = 155; //скорость передвижения робота
+int i;
+
 volatile int8_t course=0;
 // Подключаем моторы к клеммникам M3, M4
 AF_DCMotor motorL(3);
@@ -33,21 +36,17 @@ AF_DCMotor motorR(4);
 
 void setup() {
   IntOn();  //включить прерывания
-  motorL.setSpeed(155);
-  motorR.setSpeed(155);
-  motorL.run(RELEASE);
-  motorR.run(RELEASE);
+  motorL.setSpeed(MOTOR_SPEED);
+  motorR.setSpeed(MOTOR_SPEED);
+  robot_stop();
 }
-
-int i;
 
 void Rotation()
 {  
   IntOff();
   robot_rotation_left;
   delay_ms(180);
-  motorL.run(RELEASE);
-  motorR.run(RELEASE); 
+  robot_stop(); 
   course=0; 
   IntOn();  
 }   
@@ -67,30 +66,32 @@ void IntOff()
 void robot_left()
 {
   IntOff();
-  motorL.setSpeed(155);
-  motorR.setSpeed(155);
+  motorL.setSpeed(MOTOR_SPEED);
+  motorR.setSpeed(MOTOR_SPEED);
   //остановили моторы
-  motorL.run(RELEASE); 
-  motorR.run(RELEASE);
-  //поворачиваем правое назад, левое вперед на 180 милисек
+  robot_stop();
+  //поворачиваем правое назад, левое вперед 1сек
   motorL.run(BACKWARD);
   motorR.run(FORWARD);
-  delay(1800);
+  delay(1000);
+  robot_stop();
+  course=0;
   IntOn();
 }
 
 void robot_right()
 {
   IntOff();
-  motorL.setSpeed(155);
-  motorR.setSpeed(155);
+  motorL.setSpeed(MOTOR_SPEED);
+  motorR.setSpeed(MOTOR_SPEED);
   //остановили моторы
-  motorL.run(RELEASE); 
-  motorR.run(RELEASE);
-  //поворачиваем правое вперед, левое назад на 180 милисек
+  robot_stop();
+  //поворачиваем правое вперед, левое назад 1сек
   motorL.run(FORWARD);
   motorR.run(BACKWARD);
-  delay(1800);
+  delay(1000);
+  robot_stop();
+  course=0;
   IntOn();
 }
 
@@ -108,17 +109,23 @@ void  right_interrupt()
    if(course < 0){ robot_right(); }else{ robot_left();}
 } 
 
+void robot_stop()
+{
+  //остановили моторы
+  motorL.run(RELEASE); 
+  motorR.run(RELEASE);
+}
+
 void loop() {
-  // Двигаемся условно вперед одну секунду 
+  // Двигаемся условно вперед пять секунд
   motorL.run(FORWARD); // Задаем движение вперед
   motorR.run(FORWARD);
-  motorL.setSpeed(155); // Задаем скорость движения
-  motorR.setSpeed(155); 
+  motorL.setSpeed(MOTOR_SPEED); // Задаем скорость движения
+  motorR.setSpeed(MOTOR_SPEED); 
   delay(5000);
   
   // Останавливаем двигатели
-  motorL.run(RELEASE); 
-  motorR.run(RELEASE);
+  robot_stop();
   delay(500);
   
   //поворот налево
