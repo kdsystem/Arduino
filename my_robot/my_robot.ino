@@ -26,7 +26,9 @@
 //#define robot_right D4_Low; D5_Low; D6_High; D7_Low
 #define robot_rotation_left D4_Low; D5_High; D6_Low; D7_High
 
-const byte MOTOR_SPEED = 155; //скорость передвижения робота
+const byte MOTOR_SPEED = 80; //скорость передвижения робота
+const byte TURN_SPEED = 80;
+const int TURN_TIME = 180;
 int i;
 
 volatile int8_t course=0;
@@ -35,21 +37,14 @@ AF_DCMotor motorL(3);
 AF_DCMotor motorR(4);
 
 void setup() {
-  IntOn();  //включить прерывания
+  Serial.begin(9600);
+  pinMode(2,INPUT);
+  pinMode(3,INPUT);
   motorL.setSpeed(MOTOR_SPEED);
   motorR.setSpeed(MOTOR_SPEED);
   robot_stop();
+  IntOn();  //включить прерывания
 }
-
-void Rotation()
-{  
-  IntOff();
-  robot_rotation_left;
-  delay_ms(180);
-  robot_stop(); 
-  course=0; 
-  IntOn();  
-}   
 
 void IntOn()
 {
@@ -63,33 +58,33 @@ void IntOff()
   detachInterrupt(1);  // отключить срабатывание прерывания interrupt1
 }  
 
-void robot_left()
+void robot_right()
 {
   IntOff();
-  motorL.setSpeed(MOTOR_SPEED);
-  motorR.setSpeed(MOTOR_SPEED);
   //остановили моторы
   robot_stop();
+  motorL.setSpeed(TURN_SPEED);
+  motorR.setSpeed(TURN_SPEED);
   //поворачиваем правое назад, левое вперед 1сек
   motorL.run(BACKWARD);
   motorR.run(FORWARD);
-  delay(1000);
+  delay_ms(TURN_TIME);
   robot_stop();
   course=0;
   IntOn();
 }
 
-void robot_right()
+void robot_left()
 {
   IntOff();
-  motorL.setSpeed(MOTOR_SPEED);
-  motorR.setSpeed(MOTOR_SPEED);
   //остановили моторы
   robot_stop();
+  motorL.setSpeed(TURN_SPEED);
+  motorR.setSpeed(TURN_SPEED);
   //поворачиваем правое вперед, левое назад 1сек
   motorL.run(FORWARD);
   motorR.run(BACKWARD);
-  delay(1000);
+  delay_ms(TURN_TIME);
   robot_stop();
   course=0;
   IntOn();
@@ -98,15 +93,19 @@ void robot_right()
 void  left_interrupt()  
 // обработка внешнего прерывания левое колесо
 { 
-  course--; 
-  if(course > 0) { robot_left(); }else{ robot_right();}
+  course--;
+  Serial.print("Left interrupt......course "); 
+  Serial.println(course);   
+  //if(course > 0) { robot_left(); }else{ robot_right();}
 }  
 
 void  right_interrupt()  
 // обработка внешнего прерывания правое колесо
 {
-   course++; 
-   if(course < 0){ robot_right(); }else{ robot_left();}
+   course++;
+   Serial.print("Right interrupt......course ");
+   Serial.println(course);   
+   //if(course < 0){ robot_right(); }else{ robot_left();}
 } 
 
 void robot_stop()
@@ -117,20 +116,20 @@ void robot_stop()
 }
 
 void loop() {
+  motorL.setSpeed(MOTOR_SPEED); // Задаем скорость движения
+  motorR.setSpeed(MOTOR_SPEED); 
   // Двигаемся условно вперед пять секунд
   motorL.run(FORWARD); // Задаем движение вперед
   motorR.run(FORWARD);
-  motorL.setSpeed(MOTOR_SPEED); // Задаем скорость движения
-  motorR.setSpeed(MOTOR_SPEED); 
-  delay(5000);
+  
+  delay_ms(5000);
   
   // Останавливаем двигатели
   robot_stop();
-  delay(500);
+  delay_ms(500);
   
   //поворот налево
-  robot_left();
-  delay(500);
-  robot_stop();
-  
+  //robot_left();
+  //delay_ms(500);
+  //robot_stop();
 }
