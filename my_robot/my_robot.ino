@@ -48,8 +48,9 @@ void setup() {
 
 void IntOn()
 {
-  attachInterrupt(0, left_interrupt, RISING);  // настроить срабатывание прерывания interrupt0 pin 2 по перепаду с низкого (Low) на высокий(HIGH)
-  attachInterrupt(1, right_interrupt, RISING);  // настроить срабатывание прерывания interrupt1 pin 3 по перепаду с низкого (Low) на высокий(HIGH) 
+  //было RISING, изменил на CHANGE
+  attachInterrupt(0, left_interrupt, CHANGE);  // настроить срабатывание прерывания interrupt0 pin 2 по перепаду с низкого (Low) на высокий(HIGH)
+  attachInterrupt(1, right_interrupt, CHANGE);  // настроить срабатывание прерывания interrupt1 pin 3 по перепаду с низкого (Low) на высокий(HIGH) 
 }
 
 void IntOff()
@@ -65,7 +66,7 @@ void robot_right()
   //robot_stop();
   motorL.setSpeed(TURN_SPEED);
   motorR.setSpeed(TURN_SPEED);
-  //поворачиваем правое назад, левое вперед 1сек
+  //поворачиваем правое назад 1сек
   //motorL.run(BACKWARD);
   motorL.run(RELEASE);
   motorR.run(BACKWARD);
@@ -82,7 +83,7 @@ void robot_left()
   //robot_stop();
   motorL.setSpeed(TURN_SPEED);
   motorR.setSpeed(TURN_SPEED);
-  //поворачиваем правое вперед, левое назад 1сек
+  //поворачиваем левое назад 1сек
   //motorL.run(FORWARD);
   motorR.run(RELEASE);
   motorL.run(BACKWARD);
