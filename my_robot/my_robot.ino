@@ -62,14 +62,15 @@ void robot_right()
 {
   IntOff();
   //остановили моторы
-  robot_stop();
+  //robot_stop();
   motorL.setSpeed(TURN_SPEED);
   motorR.setSpeed(TURN_SPEED);
   //поворачиваем правое назад, левое вперед 1сек
-  motorL.run(BACKWARD);
-  motorR.run(FORWARD);
+  //motorL.run(BACKWARD);
+  motorL.run(RELEASE);
+  motorR.run(BACKWARD);
   delay_ms(TURN_TIME);
-  robot_stop();
+  //robot_stop();
   course=0;
   IntOn();
 }
@@ -78,14 +79,15 @@ void robot_left()
 {
   IntOff();
   //остановили моторы
-  robot_stop();
+  //robot_stop();
   motorL.setSpeed(TURN_SPEED);
   motorR.setSpeed(TURN_SPEED);
   //поворачиваем правое вперед, левое назад 1сек
-  motorL.run(FORWARD);
-  motorR.run(BACKWARD);
+  //motorL.run(FORWARD);
+  motorR.run(RELEASE);
+  motorL.run(BACKWARD);
   delay(TURN_TIME);
-  robot_stop();
+  //robot_stop();
   course=0;
   IntOn();
 }
