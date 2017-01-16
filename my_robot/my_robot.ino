@@ -38,8 +38,8 @@ AF_DCMotor motorR(4);
 
 void setup() {
   Serial.begin(9600);
-  pinMode(2,INPUT);
-  pinMode(3,INPUT);
+  //pinMode(2,INPUT);
+  //pinMode(3,INPUT);
   motorL.setSpeed(MOTOR_SPEED);
   motorR.setSpeed(MOTOR_SPEED);
   robot_stop();
@@ -84,7 +84,7 @@ void robot_left()
   //поворачиваем правое вперед, левое назад 1сек
   motorL.run(FORWARD);
   motorR.run(BACKWARD);
-  delay_ms(TURN_TIME);
+  delay(TURN_TIME);
   robot_stop();
   course=0;
   IntOn();
@@ -122,11 +122,11 @@ void loop() {
   motorL.run(FORWARD); // Задаем движение вперед
   motorR.run(FORWARD);
   
-  delay_ms(5000);
+  delay(5000);
   
   // Останавливаем двигатели
   robot_stop();
-  delay_ms(500);
+  delay(500);
   
   //поворот налево
   //robot_left();
