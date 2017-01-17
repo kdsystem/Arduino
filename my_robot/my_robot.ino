@@ -37,7 +37,7 @@ AF_DCMotor motorL(3);
 AF_DCMotor motorR(4);
 
 void setup() {
-  Serial.begin(9600);
+  //Serial.begin(9600);
   //pinMode(2,INPUT);
   //pinMode(3,INPUT);
   motorL.setSpeed(MOTOR_SPEED);
@@ -70,9 +70,9 @@ void robot_right()
   //motorL.run(BACKWARD);
   motorL.run(RELEASE);
   motorR.run(BACKWARD);
-  delay_ms(TURN_TIME);
+  delay(TURN_TIME);
   //robot_stop();
-  course=0;
+  //course=0;
   IntOn();
 }
 
@@ -89,7 +89,7 @@ void robot_left()
   motorL.run(BACKWARD);
   delay(TURN_TIME);
   //robot_stop();
-  course=0;
+  //course=0;
   IntOn();
 }
 
@@ -97,18 +97,18 @@ void  left_interrupt()
 // обработка внешнего прерывания левое колесо
 { 
   course--;
-  Serial.print("Left interrupt......course "); 
-  Serial.println(course);   
-  //if(course > 0) { robot_left(); }else{ robot_right();}
+  //Serial.print("Left interrupt......course "); 
+  //Serial.println(course);   
+  if(course > 0) { robot_left(); }else{ robot_right();}
 }  
 
 void  right_interrupt()  
 // обработка внешнего прерывания правое колесо
 {
    course++;
-   Serial.print("Right interrupt......course ");
-   Serial.println(course);   
-   //if(course < 0){ robot_right(); }else{ robot_left();}
+   //Serial.print("Right interrupt......course ");
+   //Serial.println(course);   
+   if(course < 0){ robot_right(); }else{ robot_left();}
 } 
 
 void robot_stop()
