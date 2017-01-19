@@ -26,8 +26,8 @@
 //#define robot_right D4_Low; D5_Low; D6_High; D7_Low
 #define robot_rotation_left D4_Low; D5_High; D6_Low; D7_High
 
-const byte MOTOR_SPEED = 80; //скорость передвижения робота
-const byte TURN_SPEED = 80;
+const byte MOTOR_SPEED = 150; //скорость передвижения робота
+const byte TURN_SPEED = 150;
 const int TURN_TIME = 180;
 int i;
 
@@ -71,8 +71,6 @@ void robot_right()
   motorL.run(RELEASE);
   motorR.run(BACKWARD);
   delay(TURN_TIME);
-  //robot_stop();
-  //course=0;
   IntOn();
 }
 
@@ -88,8 +86,6 @@ void robot_left()
   motorR.run(RELEASE);
   motorL.run(BACKWARD);
   delay(TURN_TIME);
-  //robot_stop();
-  //course=0;
   IntOn();
 }
 
@@ -129,7 +125,7 @@ void loop() {
   
   // Останавливаем двигатели
   robot_stop();
-  delay(500);
+  //delay(500);
   
   //поворот налево
   //robot_left();
