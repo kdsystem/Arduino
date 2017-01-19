@@ -26,9 +26,9 @@
 //#define robot_right D4_Low; D5_Low; D6_High; D7_Low
 #define robot_rotation_left D4_Low; D5_High; D6_Low; D7_High
 
-const byte MOTOR_SPEED = 150; //скорость передвижения робота
-const byte TURN_SPEED = 150;
-const int TURN_TIME = 180;
+const byte MOTOR_SPEED = 110; //скорость передвижения робота
+const byte TURN_SPEED = 110;
+const int TURN_TIME = 10;
 int i;
 
 volatile int8_t course=0;
@@ -49,8 +49,8 @@ void setup() {
 void IntOn()
 {
   //было RISING, изменил на CHANGE
-  attachInterrupt(0, left_interrupt, CHANGE);  // настроить срабатывание прерывания interrupt0 pin 2 по перепаду с низкого (Low) на высокий(HIGH)
-  attachInterrupt(1, right_interrupt, CHANGE);  // настроить срабатывание прерывания interrupt1 pin 3 по перепаду с низкого (Low) на высокий(HIGH) 
+  attachInterrupt(0, left_interrupt, RISING);  // настроить срабатывание прерывания interrupt0 pin 2 по перепаду с низкого (Low) на высокий(HIGH)
+  attachInterrupt(1, right_interrupt, RISING);  // настроить срабатывание прерывания interrupt1 pin 3 по перепаду с низкого (Low) на высокий(HIGH) 
 }
 
 void IntOff()
@@ -70,7 +70,7 @@ void robot_right()
   //motorL.run(BACKWARD);
   motorL.run(RELEASE);
   motorR.run(BACKWARD);
-  delay(TURN_TIME);
+  //delay(TURN_TIME);
   IntOn();
 }
 
@@ -85,7 +85,7 @@ void robot_left()
   //motorL.run(FORWARD);
   motorR.run(RELEASE);
   motorL.run(BACKWARD);
-  delay(TURN_TIME);
+  //delay(TURN_TIME);
   IntOn();
 }
 
