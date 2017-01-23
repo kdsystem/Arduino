@@ -26,8 +26,8 @@
 //#define robot_right D4_Low; D5_Low; D6_High; D7_Low
 #define robot_rotation_left D4_Low; D5_High; D6_Low; D7_High
 
-const byte MOTOR_SPEED = 110; //скорость передвижения робота
-const byte TURN_SPEED = 110;
+const byte MOTOR_SPEED = 80; //скорость передвижения робота
+const byte TURN_SPEED = 80;
 const int TURN_TIME = 10;
 int i;
 
@@ -40,8 +40,8 @@ void setup() {
   //Serial.begin(9600);
   //pinMode(2,INPUT);
   //pinMode(3,INPUT);
-  motorL.setSpeed(MOTOR_SPEED);
-  motorR.setSpeed(MOTOR_SPEED);
+  //motorL.setSpeed(MOTOR_SPEED);
+  //motorR.setSpeed(MOTOR_SPEED);
   robot_stop();
   IntOn();  //включить прерывания
 }
@@ -121,10 +121,10 @@ void loop() {
   motorL.run(FORWARD); // Задаем движение вперед
   motorR.run(FORWARD);
   
-  delay(5000);
+  //delay(5000);
   
   // Останавливаем двигатели
-  robot_stop();
+  //robot_stop();
   //delay(500);
   
   //поворот налево
