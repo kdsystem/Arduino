@@ -27,6 +27,7 @@ String triggered_ir;
 const byte MOTOR_SPEED = 80; //скорость передвижения робота
 const byte TURN_SPEED = 80;
 const int TURN_TIME = 100;
+const byte beep_pin = 9;
 int i;
 
 volatile int8_t course=0;
@@ -46,9 +47,20 @@ void setup() {
   pinMode(ir_ml, INPUT);
   pinMode(ir_mr, INPUT);
   pinMode(ir_r, INPUT);
+  pinMode(beep_pin, OUTPUT);
   robot_stop();
   IntOn();  //включить прерывания
+  for(uint8_t i=0; i<12; i++) beep(70, random(100, 2000));
+  delay(2000);
+
 }
+
+void beep(unsigned char volume, unsigned char delayms){
+  analogWrite(9, volume);
+  delay(delayms);
+  analogWrite(9, 0);
+  delay(delayms);
+}  
 
 void IntOn()
 {
