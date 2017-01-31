@@ -1,5 +1,4 @@
 #include <AFMotor.h>  // Подключаем библиотеку для работы с шилдом 
-#include <Cyberlib.h>
 //Управление пинами:
 // считаем, что motorL - левый мотор
 // считаем, что motorR - правый мотор
@@ -19,12 +18,6 @@
 //Цифровой вывод 9- Сервопривод №1
 //Цифровой вывод 10- Сервопривод №2
 
-//#define encoders_init D2_In; D3_In; D2_High; D3_High
-//#define robot_go D4_Low; D5_High; D6_High; D7_Low
-//#define robot_stop D4_Low; D5_Low; D6_Low; D7_Low
-//#define robot_left  D4_Low; D5_High; D6_Low; D7_Low
-//#define robot_right D4_Low; D5_Low; D6_High; D7_Low
-//#define robot_rotation_left D4_Low; D5_High; D6_Low; D7_High
 #define ir_l A0 //пин 1 ИК-датчика
 #define ir_ml A1 //пин 2 ИК-датчика
 #define ir_mr A2 //пин 3 ИК-датчика
