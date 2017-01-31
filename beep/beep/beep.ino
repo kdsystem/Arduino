@@ -9,6 +9,7 @@ void setup()  {
 
 void loop()  { 
   for(uint8_t i=0; i<12; i++) beep(70, random(100, 2000));
+  delay(2000);
   //beep(200); 
 }
 
