@@ -35,15 +35,15 @@ void setup() {
   //motorL.setSpeed(MOTOR_SPEED);
   //motorR.setSpeed(MOTOR_SPEED);
   pinMode(ir_l, INPUT);
-  pinMode(ir_ml, INPUT);
-  pinMode(ir_mr, INPUT);
+  //pinMode(ir_ml, INPUT);
+  //pinMode(ir_mr, INPUT);
   pinMode(ir_r, INPUT);
-  pinMode(beep_pin, OUTPUT);
+  //pinMode(beep_pin, OUTPUT);
   robot_stop();
   //звуковое оповещение готовности робота
   IntOn();  //включить прерывания
-  for(uint8_t i=0; i<12; i++) beep(70, random(100, 2000));
-  delay(2000);
+  //for(uint8_t i=0; i<12; i++) beep(70, random(100, 2000));
+  //delay(2000);
 
 }
 
@@ -123,20 +123,6 @@ void getSensors()
       //Serial.println("Triggered ir is LEFT");
     }
 
-  if (digitalRead(ir_ml) == LOW)
-    {
-      triggered_ir="ir_ml";
-      TurnLeft("middle_left");
-      //Serial.println("Triggered ir is MIDDLE LEFT");
-    }
-
-  if (digitalRead(ir_mr) == LOW)
-    {
-      triggered_ir="ir_mr";
-      TurnRight("right");
-      //Serial.println("Triggered ir is MIDDLE RIGHT");
-    }
-
   if (digitalRead(ir_r) == LOW)
     {
       triggered_ir="ir_r";
@@ -173,7 +159,7 @@ void  left_interrupt()
   course--;
   //Serial.print("Left interrupt......course "); 
   //Serial.println(course);   
-  getSensors;
+  getSensors();
   if(course > 0) { correct_left(); }else{ correct_rigth();}
 }  
 
@@ -183,7 +169,7 @@ void  right_interrupt()
    course++;
    //Serial.print("Right interrupt......course ");
    //Serial.println(course);   
-   getSensors;
+   getSensors();
    if(course < 0){ correct_rigth(); }else{ correct_left();}
 } 
 
