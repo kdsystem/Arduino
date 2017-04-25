@@ -32,7 +32,7 @@ void setup() {
   pinMode(switchPin, INPUT);
   pinMode(ledPin, OUTPUT);
   //Установим прерывание
-  attachInterrupt(switchPin, Send2HUB, CHANGE );
+  attachInterrupt(0, Send2HUB, CHANGE );
 }
 
 void Send2HUB() {
