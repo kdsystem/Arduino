@@ -14,7 +14,7 @@ void loop() {
   float result = (high << 8) | low;
   result = (1.1 * 1023.0 * 1000) / result; // Результат Vcc в милливольтах
   Serial.println(result);
-  int time = millis() / 1000;
+  long time = millis() / 1000;
   if (time / 60 / 60 < 10) {
     Serial.print ("0");
   }
