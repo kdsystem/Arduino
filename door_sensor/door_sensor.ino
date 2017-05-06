@@ -16,7 +16,6 @@ RF24 radio(9, 10);
 unsigned long count = 0;
 int switchPin = 2; // к выводу 2 подключён геркон
 int ledPin = 3; // к пину 3 подключён cветодиод (13 - встроенный)
-Bounce bouncer = Bounce(switchPin,5);
 
 void setup() {
   pinMode(switchPin, INPUT); // задаём вывод 2 в качестве входа (будем считывать с него)
