@@ -18,3 +18,4 @@ int Temp = (data[1]<< 8)+data[0];
 Temp = Temp>>4;
 Serial.println(Temp);
 }
+
