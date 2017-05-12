@@ -73,7 +73,7 @@ void Send2HUB() {
     
     //Отправить состояние двери (откр или закр)
     //когда геркон замкнут, значение "0" (LOW), когда разомкнут - "1" (HIGH)
-    String out = "s1|sw1:" + String(doorstate)+"|volt:"+volt/1000+"|temp:"+temp+"|";
+    String out = "s01|sw01:" + String(doorstate)+"|volt:"+volt/1000+"|temp:"+temp+"|";
     Serial.println(out);
     out.toCharArray(outBuffer, 40);
     radio.write(outBuffer, 40);
