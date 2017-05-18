@@ -1,5 +1,4 @@
 #include <OneWire.h>
-//тест
 OneWire ds(4);
 void setup() {
 Serial.begin(9600); 
@@ -17,6 +16,5 @@ data[0] = ds.read();
 data[1] = ds.read();
 int Temp = (data[1]<< 8)+data[0];
 Temp = Temp>>4;
-Serial.println(Temp);
 Serial.println(Temp);
 }
